@@ -1,8 +1,6 @@
-const tutorial = require('./tutorial')
-console.log(tutorial)
-//console.log("Hello world from Nodejs");
-//console.log(tutorial(1,1));
+// testing a module we downloaded using npm install.
+const _ = require('lodash');
 
-console.log(tutorial.sum(1,1));
-console.log(tutorial.PI);
-console.log(new tutorial.SomeMathsObject());
+let example =_.fill([1,2,3,4,5], "banana", 1, 4);
+
+console.log(example);
