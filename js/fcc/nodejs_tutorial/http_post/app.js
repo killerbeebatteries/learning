@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const Joi = require('joi');
 const bodyParser = require('body-parser');
 const app = express();
 
@@ -12,6 +13,8 @@ app.get('/', (req, res) => {
 
 });
 
+/*
+// json
 app.post('/', (req, res) => {
 	console.log(req.body);
 	// database work here
@@ -20,6 +23,32 @@ app.post('/', (req, res) => {
 
 	// using json
 	res.json({ success: true});
+
+});
+*/
+
+// joi
+// NOTE: currrently broken, but you get the idea.
+app.post('/', (req, res) => {
+	console.log(req.body);
+	const schema = Joi.object().keys({
+
+		email: Joi.string().trim().email().required(),
+		password: Joi.string().min(5).max(10).required()
+
+	});
+
+	Joi.validate(req.body, schema, (err, result) => {
+
+		if(err) {
+			console.log(err);
+			res.send('an error has occurred.');
+		};
+
+		console.log(result);
+		res.send('successfully posted data.');
+
+	});
 
 });
 
