@@ -38,7 +38,7 @@ app.post('/', (req, res) => {
 
 	});
 
-	Joi.validate(req.body, schema, (err, result) => {
+	schema.validate(req.body, schema, (err, result) => {
 
 		if(err) {
 			console.log(err);
