@@ -1,0 +1,22 @@
+{
+	"variables": {
+		"gcp_project_id": "{{env `PROJECT_ID`}}"
+	},
+	"builders": [
+		{
+			"type": "googlecompute",
+			"project_id": "{{user `gcp_project_id`}}",
+			"source_image": "debian-11-bullseye-v20220621",
+			"ssh_username": "packer",
+			"zone": "australia-southeast1-a",
+			"image_description": "Jenkins Agent" ,
+			"image_name": "jenkins-agent"
+		}
+	],
+	"provisioners": [
+		{
+			"type": "ansible",
+			"playbook_file": "../ansible/playbook.yml"
+		}
+	]
+}
