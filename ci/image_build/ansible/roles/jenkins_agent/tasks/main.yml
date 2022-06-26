@@ -10,28 +10,14 @@
     update_cache: true
   become: true
 
-- name: Add repository
-  get_url: 
-    url: https://deb.nodesource.com/setup_10.x 
-    dest: ~/
-  
-- name: Activate repo
-  command: bash -
-  become: true
-
-- name: Update cache
+- name: install vim
   apt:
-    update_cache: yes
-  become: true
-
-- name: install node
-  apt:
-    name: nodejs
+    name: vim
     state: present
   become: true
 
-- name: install npm
+- name: install python3
   apt:
-    name: npm
+    name: python3
     state: present
   become: true
