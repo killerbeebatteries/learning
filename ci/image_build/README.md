@@ -52,4 +52,11 @@ You should see the image show up in Compute Engine -> Storage -> Images.
 
 HCL templates FTW.
 
+### Run
 
+```
+cd hcl/image_build/packer
+packer build -var 'project_name=<my_gcp_project_id_here>' -var "image_name=jenkins-agent-$(date '+%Y%m%d')" config.pkr.hcl
+```
+
+You should see the image show up in Compute Engine -> Storage -> Images.
