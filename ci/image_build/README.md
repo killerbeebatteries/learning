@@ -15,6 +15,7 @@ Playing around with packer and ansible to automate the building of GCP compatiab
 ```
 sudo apt install ansible
 sudo apt install packer
+sudo apt install vagrant
 ```
 
 ### cloud config
@@ -42,7 +43,7 @@ You can also use the GCP Cloud builder to achieve this apparently (which I think
 ### Run
 
 ```
-cd legacy/image_build/packer
+cd packer_legacy/packer
 export PROJECT_ID=<my_gcp_project_id_here>
 packer build packer.json
 ```
@@ -54,9 +55,26 @@ HCL templates FTW.
 
 ### Run
 
+#### All
+
 ```
-cd hcl/image_build/packer
+cd packer_hcl/packer
 packer build -var 'project_name=<my_gcp_project_id_here>' -var "image_name=jenkins-agent-$(date '+%Y%m%d')" config.pkr.hcl
 ```
 
-You should see the image show up in Compute Engine -> Storage -> Images.
+You should see the image show up in:
+* Compute Engine -> Storage -> Images.
+* `vagrant box list`
+
+
+#### Vagrant only
+
+Using the vagrant builder to test out ansible locally, before building on GCP.
+
+This involves using the `-only` variable option.
+
+```
+cd packer_hcl/packer
+packer build -only=vagrant.jenkins-agent -var 'project_name=<my_gcp_project_id_here>' -var "image_name=jenkins-agent-$(date '+%Y%m%d')" config.pkr.hcl
+```
+

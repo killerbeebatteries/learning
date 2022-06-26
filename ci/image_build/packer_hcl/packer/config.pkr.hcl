@@ -13,13 +13,21 @@ source "googlecompute" "jenkins-agent" {
 	ssh_username = "packer"
 	zone = "australia-southeast1-a"
 }
+
+source "vagrant" "jenkins-agent" {
+  communicator = "ssh"
+  source_path = "hashicorp/precise64"
+  provider = "virtualbox"
+  add_force = true
+}
  
 build {
 	sources = [
-		"sources.googlecompute.jenkins-agent"
+		"sources.googlecompute.jenkins-agent",
+		"sources.vagrant.jenkins-agent"
 	]
 
 	provisioner "ansible" {
-		playbook_file = "../ansible/site.yml"
+		playbook_file = "../../ansible/site.yml"
 	}
 }

@@ -1,4 +1,0 @@
-- name : packer_ansible
-  hosts: all
-  roles:
-    - jenkins_agent

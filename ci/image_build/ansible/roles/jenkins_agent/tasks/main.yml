@@ -1,26 +1,36 @@
 - name: Update
   apt:
     update_cache: yes
-  become: true- name: upgrade system
+  become: true
+
+- name: upgrade system
   apt:
     upgrade: yes
     upgrade: dist
     update_cache: true
-  become: true- name: Add repository
+  become: true
+
+- name: Add repository
   get_url: 
     url: https://deb.nodesource.com/setup_10.x 
     dest: ~/
   
 - name: Activate repo
   command: bash -
-  become: true- name: Update cache
+  become: true
+
+- name: Update cache
   apt:
     update_cache: yes
-  become: true- name: install node
+  become: true
+
+- name: install node
   apt:
     name: nodejs
     state: present
-  become: true- name: install npm
+  become: true
+
+- name: install npm
   apt:
     name: npm
     state: present
